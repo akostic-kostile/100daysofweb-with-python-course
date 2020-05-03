@@ -1,7 +1,6 @@
-# from time import strftime, localtime
 import time
 from flask import render_template
-from program import app
+from program import app # noqa
 
 timenow = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
