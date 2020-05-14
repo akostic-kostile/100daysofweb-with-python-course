@@ -13,6 +13,7 @@ def _load_movie_data():
         movies = json.loads(f.read())
         for movie in movies:
             movie["genre"] = movie.get("genre").split("|")
+            movie["rating"] = float(movie.get("rating"))
         return {movie["id"]: movie for movie in movies}
 
 
@@ -36,7 +37,8 @@ class Movie(types.Type):
     language = validators.String(
         max_length=100, enum=list(VALID_LANGUAGES), allow_null=True
     )
-    title = validators.String(max_length=100)
+    title = validators.String(max_length=200)
+    rating = validators.Number(minimum=0, maximum=10)
 
 
 # API methods
@@ -89,6 +91,15 @@ def delete_movie(movie_id: int) -> JSONResponse:
     return JSONResponse({}, status_code=204)
 
 
+def get_rating_greater_than(rating: float) -> JSONResponse:
+    rating = float(rating)
+    return sorted(
+        [movie for movie in movies.values() if movie.get("rating") >= rating],
+        key=lambda x: x.get("rating"),
+        reverse=True,
+    )
+
+
 routes = [
     Route("/", method="GET", handler=list_movies),
     Route("/", method="POST", handler=create_movie),
@@ -96,6 +107,7 @@ routes = [
     Route("/{movie_id}/", method="PUT", handler=update_movie),
     Route("/{movie_id}/", method="DELETE", handler=delete_movie),
     Route("/genre/{genre}/", method="GET", handler=list_movies_by_genre),
+    Route("/rating/{rating}", method="GET", handler=get_rating_greater_than),
 ]
 
 app = App(routes=routes)
