@@ -5,8 +5,8 @@
 <h3>Enter a colour to see which Pokemon are a match!</h3>
 <div>
 	<form class="mui-form" method="POST" action="/pokemon">
-		<label for="pokecolour">Pokemon Colour</label>
-		<input type="text" class="form-control" id="pokecolour" name="pokecolour" placeholder="Eg: Blue"><br>
+		<label for="pokecol">Pokemon Colour</label>
+		<input type="text" class="form-control" id="pokecol" name="pokecolour" placeholder="Eg: Blue"><br>
 		<button type="submit" class="mui-btn mui-btn--raised" value="Submit">Submit</button>
 	</form>
 </div>
@@ -29,6 +29,9 @@
 			{% endfor %}
 		</tbody>
 	</table>
+	{% endif %}
+	{% if error_msg %}
+	<h2>{{ error_msg }}</h2>
 	{% endif %}
 </div>
 {% endblock %}

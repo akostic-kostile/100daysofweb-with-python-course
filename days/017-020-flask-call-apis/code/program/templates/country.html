@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Pick a country and get some basic info back!</h1>
+<div>
+    <form class="mui-form" method="POST" action="/country">
+        <label for="country">Country: </label>
+        <input type="text" class="form-control" id="country" name="country" placeholder="Eg: Serbia"><br>
+        <button type="submit" class="mui-btn mui-btn--raised" value="Submit">Submit</button>
+    </form>
+</div>
+<br>
+
+<br>
+<div>
+    {% if countries %}
+    <table class="mui-table mui-table--bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Native name</th>
+                <th>Languages</th>
+                <th>Population</th>
+                <th>Flag</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in countries %}
+            <tr>
+                <td>{{ i.get("name") }}</td>
+                <td>{{ i.get("nativeName") }}</td>
+                <td>{{ i.get("languages") }}</td>
+                <td>{{ i.get("population") }}</td>
+                <td><img src="{{ i.get('flag') }}" alt="" width="600" height="400"></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+    {% if error_msg %}
+    <h2>{{ error_msg }}</h2>
+    {% endif %}
+</div>
+{% endblock %}
