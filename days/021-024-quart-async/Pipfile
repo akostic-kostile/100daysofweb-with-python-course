@@ -13,6 +13,8 @@ requests = "*"
 bs4 = "*"
 aiohttp = "*"
 cchardet = "*"
+aiodns = "*"
+Flask = "*"
 
 [requires]
 python_version = "3.8"
