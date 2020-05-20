@@ -15,6 +15,7 @@ aiohttp = "*"
 cchardet = "*"
 aiodns = "*"
 Flask = "*"
+quart = "*"
 
 [requires]
 python_version = "3.8"
