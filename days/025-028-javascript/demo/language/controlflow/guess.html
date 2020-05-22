@@ -1,29 +1,64 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+  <meta charset="UTF-8">
   <title>Can you guess the number?</title>
 </head>
+
 <body>
   <script type="text/javascript">
-  /* write a simple number guessing game:
-     - use 'prompt' to ask for a number, covert it to int (parseInt)
-     - if guess === null or 'q', exit (user escapes / cancels)
-     - if not a number continue
-     - if number == secretNumber, print 'You guessed it!' (use console.log)
-     - if number < secretNumber, print 'Too low'
-     - if number > secretNumber, print 'Too high'
-     - bonus: count the number of attempts, and exit upon the 5th guess
-  */
-  function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+    /* write a simple number guessing game:
+       - use 'prompt' to ask for a number, covert it to int (parseInt)
+       - if guess === null or 'q', exit (user escapes / cancels)
+       - if not a number continue
+       - if number == secretNumber, print 'You guessed it!' (use console.log)
+       - if number < secretNumber, print 'Too low'
+       - if number > secretNumber, print 'Too high'
+       - bonus: count the number of attempts, and exit upon the 5th guess
+    */
+    function getRandomInt(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 
-  const secretNumber = getRandomInt(1, 15);
+    const secretNumber = getRandomInt(1, 15);
 
-  // you code
+    // you code
+    let attempts = 5
+    //let guess = parseInt(prompt("Guess a number"))
+    while (attempts > 0) {
+      let guess = prompt("Guess a number!\nAttempts left: " + attempts)
+
+      if (guess === null || guess === "q") {
+        console.log("Bye")
+        break
+      }
+      guess = parseInt(guess)
+      if (isNaN(guess)) {
+        console.log("Please enter a number")
+        continue
+      }
+
+      if (guess === secretNumber) {
+        console.log("You guessed it!")
+        break
+      } else if (guess < secretNumber) {
+        console.log("Too low")
+        attempts -= 1
+        continue
+      } else {
+        console.log("Too high")
+        attempts -= 1
+        continue
+      }
+    }
+    if (attempts === 0) {
+      console.log("You ran out of attempts :(")
+    }
 
   </script>
 </body>
+
 </html>
