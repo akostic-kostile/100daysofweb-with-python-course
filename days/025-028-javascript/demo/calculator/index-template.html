@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>JS is Fun!</title>
   <style>
@@ -7,17 +8,25 @@
       width: 800px;
       margin: 0 auto;
     }
+
     #result {
       font-size: 200%;
       font-weight: bold;
     }
-    #result, #calculateForm {
+
+    #result,
+    #calculateForm {
       padding: 10px;
       margin: 10px 0;
       border: 1px solid #ddd;
     }
+
+    .invalid {
+      color: red;
+    }
   </style>
 </head>
+
 <body>
 
   <h1>Basic JS Calculator</h1>
@@ -37,10 +46,27 @@
   <div id="result"></div>
 
   <script type="text/javascript">
-  function doCalculation(){
-    // you code
-  }
+    const simple_math = {
+      "+": function (a, b) { return a + b },
+      "-": function (a, b) { return a - b },
+      "*": function (a, b) { return a * b },
+      "/": function (a, b) { return a / b },
+    }
+    let num1 = document.getElementById("num1")
+    let num2 = document.getElementById("num2")
+    let op = document.getElementById("operator")
+    let res = document.getElementById("result")
+    function doCalculation() {
+      let result = simple_math[op.value](Number(num1.value), Number(num2.value));
+      if (isNaN(result) || (result === Infinity)) {
+        res.classList.add("invalid")
+      } else {
+        res.classList.remove("invalid")
+      }
+      res.textContent = result
+    }
   </script>
 
 </body>
+
 </html>
